@@ -1,6 +1,6 @@
 id: pl.nieto.fityk
 runtime: org.freedesktop.Platform
-runtime-version: '21.08'
+runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
 command: fityk
 rename-icon: fityk
@@ -102,16 +102,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/wojdyr/fityk.git
-        tag: v1.3.1
-        commit: 5b11f7e5277c122a266895314be98e564712a60e
+        tag: v1.3.2
+        commit: e262bcc72adf952f8799d424e7c156d5ec7da055
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
-      - type: patch
-        path: gtk3.patch
-      - type: patch
-        path: appdata1.patch
-      - type: patch
-        path: appdata2.patch
-      - type: patch
-        path: appdata3.patch
