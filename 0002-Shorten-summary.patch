@@ -1,0 +1,23 @@
+Date: Tue, 16 Apr 2024 09:55:55 +0200
+Subject: [PATCH 2/3] Shorten summary.
+
+---
+ fityk.appdata.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/fityk.appdata.xml b/fityk.appdata.xml
+index 705d757c..69ead3c4 100644
+--- a/fityk.appdata.xml
++++ b/fityk.appdata.xml
+@@ -5,7 +5,7 @@
+ 	<project_license>GPL-2.0-or-later</project_license>
+ 	<developer_name>Marcin Wojdyr</developer_name>
+ 	<name>Fityk</name>
+-	<summary>Non-linear curve fitting and data analysis</summary>
++	<summary>Curve fitting tool</summary>
+ 
+ 	<description>
+ 		<p>Fityk [fi:tik] is a program for data processing and nonlinear curve fitting.</p>
+-- 
+2.40.1
+

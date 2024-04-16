@@ -107,3 +107,7 @@ modules:
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
+      - type: patch
+        path: 0001-Add-missing-developer-name.patch
+      - type: patch
+        path: 0002-Shorten-summary.patch
