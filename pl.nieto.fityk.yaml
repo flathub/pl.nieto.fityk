@@ -1,6 +1,6 @@
 id: pl.nieto.fityk
 runtime: org.freedesktop.Platform
-runtime-version: '23.08'
+runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 command: fityk
 rename-icon: fityk
@@ -11,6 +11,14 @@ finish-args:
   - --socket=fallback-x11
   - --device=dri
   - --share=ipc
+
+cleanup:
+  - /include
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /share/man
+  - "*.la"
+  - "*.a"
 
 modules:
   - shared-modules/glu/glu-9.json
@@ -23,18 +31,16 @@ modules:
     cleanup:
       - /bin
       - /lib/wx
+      - /share/aclocal
       - /share/bakefile
-      - /include/wx-*
-      - /share/aclocal/wx*
     sources:
+      - type: archive
+        url: https://github.com/wxWidgets/wxWidgets/releases/download/v3.3.2/wxWidgets-3.3.2.tar.bz2
+        sha256: 50a28cb668de47b0e006cd6ebed8cf4f76c1cac6116fb3c978c44478219103f2
       - type: script
-        dest-filename: autogen.sh
         commands:
           - cp -p /usr/share/automake-*/config.{sub,guess} .
           - autoconf -f -B build/autoconf_prepend-include
-      - type: archive
-        url: https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.5.1/wxWidgets-3.0.5.1.tar.bz2
-        sha256: 440f6e73cf5afb2cbf9af10cec8da6cdd3d3998d527598a53db87099524ac807
 
   - name: boost
     buildsystem: simple
@@ -43,12 +49,8 @@ modules:
       - ./b2 install -j ${FLATPAK_BUILDER_N_JOBS}
     sources:
       - type: archive
-        url: https://archives.boost.io/release/1.86.0/source/boost_1_86_0.tar.bz2
-        sha256: 1bed88e40401b2cb7a1f76d4bab499e352fa4d0c5f31c0dbae64e24d34d7513b
-    cleanup:
-      - /include/boost
-      - /lib/libboost*.a
-      - /lib/cmake
+        url: https://archives.boost.io/release/1.90.0/source/boost_1_90_0.tar.bz2
+        sha256: 49551aff3b22cbc5c5a9ed3dbc92f0e23ea50a0f7325b0d198b705e8ee3fc305
 
   - name: xylib
     buildsystem: autotools
@@ -70,11 +72,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/stevengj/nlopt.git
-        commit: 41967f1981d82d8495c0b27151a126bc35ae0d96
-        tag: v2.6.2
-    cleanup:
-      - /share/man
-      - /include
+        tag: v2.10.1
+        commit: 9e44e525370646def8152e73bb5c53a6531f6f7e
 
   - name: swig
     config-opts:
@@ -85,15 +84,15 @@ modules:
       - '*'
     sources:
       - type: archive
-        url: https://sourceforge.net/projects/swig/files/swig/swig-3.0.12/swig-3.0.12.tar.gz
-        sha256: 7cf9f447ae7ed1c51722efc45e7f14418d15d7a1e143ac9f09a668999f4fc94d
+        url: https://sourceforge.net/projects/swig/files/swig/swig-4.4.1/swig-4.4.1.tar.gz
+        sha256: 40162a706c56f7592d08fd52ef5511cb7ac191f3593cf07306a0a554c6281fcf
 
   - name: fityk
     buildsystem: autotools
     config-opts:
       - --enable-nlopt
     build-options:
-      cxxflags: -std=c++11
+      cxxflags: -std=c++14
     sources:
       - type: git
         url: https://github.com/wojdyr/fityk.git
